@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#35445a">
+  <meta name="description" content="NastyP Studio ile piksel çizimleri ve kare kare animasyonlar oluştur.">
+  <title>NastyP Studio — Resmî Site</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    :root { --navy:#35445a; --blue:#3d7180; --red:#dc0000; --paper:#fafafa; --ink:#263b56; --muted:#68798a; --lime:#d6f58c; --card:#fff; --line:#e0e4e5; --soft:#f0f3ef; }
+    body[data-theme="dark"] { --navy:#171e2a; --blue:#78b8c7; --red:#ff4a4a; --paper:#202936; --ink:#edf1f5; --muted:#b4bfca; --lime:#d6f58c; --card:#293544; --line:#3b4858; --soft:#293544; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:90px; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:'VT323',Consolas,monospace; font-size:19px; line-height:1.4; letter-spacing:-.25px; }
+    a { color:inherit; text-decoration:none; }
+    .top { position:sticky; top:0; z-index:5; background:var(--navy); color:white; box-shadow:0 2px 5px #17233430; }
+    .nav { min-height:82px; width:min(1120px,calc(100% - 40px)); margin:auto; display:flex; align-items:center; justify-content:space-between; gap:18px; }
+    .brand { display:flex; align-items:center; gap:13px; font-size:22px; white-space:nowrap; }
+    .brand-name { color:#fff; font-family:'VT323',Consolas,monospace; font-weight:400; letter-spacing:-.4px; font-size:25px; }
+    .name-red { color:var(--red); }
+    .name-blue { color:#69a8ff; }
+    .logo { width:48px; height:48px; display:block; object-fit:contain; image-rendering:pixelated; }
+    .nav-right { display:flex; align-items:center; justify-content:flex-end; gap:20px; flex-wrap:wrap; }
+    .links { display:flex; flex-wrap:wrap; gap:20px; justify-content:flex-end; font-size:19px; }
+    .tools { display:flex; gap:8px; align-items:center; }
+    .tools select,.tools button { font:18px 'VT323',Consolas,monospace; color:white; background:#ffffff12; border:1px solid #ffffff66; padding:5px 9px; border-radius:3px; cursor:pointer; }
+    .tools select option { color:#263b56; background:white; }
+    .links a { opacity:.92; transition:color .15s; }
+    .links a:hover { color:var(--lime); }
+    main { width:min(1060px,calc(100% - 40px)); margin:0 auto; }
+    .hero { text-align:center; padding:58px 0 45px; }
+    h1 { margin:0 0 18px; font-family:'Press Start 2P','Share Tech Mono',monospace; font-size:clamp(28px,5vw,46px); font-weight:400; letter-spacing:0; }
+    .hero-logo { display:block; width:min(620px,88vw); height:auto; margin:0 auto 18px; }
+    .tag { font-size:clamp(20px,2vw,24px); color:var(--muted); margin:0 auto; max-width:720px; line-height:1.45; }
+    .hero-links { margin-top:28px; display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+    .button { display:inline-block; background:var(--red); border:2px solid var(--red); color:white; padding:9px 18px; font-size:19px; line-height:1.25; letter-spacing:-.35px; box-shadow:4px 4px 0 #263b5625; transition:transform .15s,box-shadow .15s; }
+    .button:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 #263b5625; }
+    .button.secondary { color:var(--blue); background:transparent; box-shadow:none; }
+    .pixel-scene { width:min(530px,90%); height:150px; margin:46px auto 0; position:relative; display:flex; justify-content:center; align-items:end; gap:12px; overflow:hidden; }
+    .pixel-sun { position:absolute; top:6px; width:64px; height:64px; background:var(--lime); box-shadow:0 0 0 8px #d6f58c38; }
+    .block { z-index:1; width:46px; background:#a7c9c0; border:4px solid #608e8a; box-shadow:inset 0 -9px #739f98; }
+    .block:nth-of-type(2) { height:60px; } .block:nth-of-type(3) { height:94px; background:#d0d4b4; } .block:nth-of-type(4) { height:72px; } .block:nth-of-type(5) { height:115px; background:#a8b6cb; border-color:#7285a0; box-shadow:inset 0 -9px #8294ad; } .block:nth-of-type(6) { height:58px; }
+    .ground { position:absolute; bottom:0; left:0; right:0; height:12px; background:#d8ded8; border-top:4px solid #c3cec8; }
+    section { border-top:1px solid #e3e6e7; padding:38px 0 44px; }
+    h2 { text-align:center; font-size:30px; line-height:1.25; letter-spacing:-.4px; font-weight:400; margin:0 0 28px; }
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .feature { border:2px solid var(--line); padding:20px; min-height:135px; background:var(--card); }
+    .feature b { font-size:22px; line-height:1.3; font-weight:400; }
+    .feature p { color:var(--muted); line-height:1.4; font-size:18px; margin:11px 0 0; }
+    .download { text-align:center; }
+    .download p { color:var(--muted); line-height:1.4; font-size:19px; }
+    .systems { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin:24px 0 8px; }
+    .system { min-width:175px; padding:17px 18px; background:var(--card); border:2px solid var(--line); }
+    .system strong { display:block; font-weight:400; font-size:22px; margin-bottom:12px; }
+    .system .button { width:100%; padding:8px 7px; font-size:17px; }
+    .coming-soon { display:block; width:100%; padding:8px 7px; border:2px dashed var(--line); color:var(--muted); font-size:17px; line-height:1.25; }
+    .note { font-size:16px; }
+    .about { text-align:center; max-width:760px; margin:auto; line-height:1.5; color:var(--muted); font-size:19px; }
+    .community { text-align:center; background:var(--soft); border:2px solid var(--line); padding:25px; }
+    .community h2 { margin-bottom:12px; }
+    .community p { color:var(--muted); }
+    footer { padding:24px 20px; text-align:center; background:var(--navy); color:#d8e0e7; font-size:17px; }
+    @media(max-width:700px) {
+      .nav { width:calc(100% - 28px); min-height:auto; padding:13px 0; align-items:flex-start; flex-direction:column; gap:12px; }
+      .nav-right { width:100%; justify-content:flex-start; align-items:flex-start; flex-direction:column; gap:12px; }
+      .tools { position:absolute; right:14px; top:15px; }
+      .brand { font-size:19px; } .logo { width:36px; height:36px; }
+      .links { justify-content:flex-start; gap:15px 18px; font-size:17px; }
+      main { width:calc(100% - 32px); } .hero { padding-top:42px; }
+      .features { grid-template-columns:1fr; gap:10px; } .feature { min-height:0; }
+      .pixel-scene { margin-top:35px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <nav class="nav" aria-label="Ana menü">
+      <a class="brand" href="#anasayfa"><img class="logo" src="nas.svg" alt="NastyP Studio logosu"><span class="brand-name"><span class="name-red">NastyP</span> <span class="name-blue">Studio</span></span></a>
+      <div class="nav-right"><div class="links"><a href="#ozellikler" data-t="navFeatures">ÖZELLİKLER</a><a href="#indir" data-t="navDownload">İNDİR</a><a href="#hakkinda" data-t="navAbout">HAKKINDA</a><a href="#destek" data-t="navSupport">DESTEKLE</a><a href="#discord">DISCORD</a></div><div class="tools"><select id="language" aria-label="Language"><option value="tr">Türkçe</option><option value="en">English</option><option value="ru">Русский</option><option value="uk">Українська</option><option value="lt">Lietuvių</option><option value="de">Deutsch</option></select><button id="themeToggle" type="button" aria-label="Toggle theme">🌙</button></div></div>
+    </nav>
+  </header>
+  <main>
+    <section class="hero" id="anasayfa" style="border:0">
+      <h1><img class="hero-logo" src="nasa.svg" alt="NastyP Studio"></h1>
+      <p class="tag" data-t="tagline">Piksel piksel çiz, kare kare canlandır. NastyP Studio ile fikirlerini küçük ama etkileyici sanat eserlerine dönüştür.</p>
+      <div class="hero-links"><a class="button" href="#indir" data-t="heroDownload">ŞİMDİ İNDİR ↓</a></div>
+      <div class="pixel-scene" aria-hidden="true"><div class="pixel-sun"></div><div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div><div class="ground"></div></div>
+    </section>
+    <section id="ozellikler">
+      <h2 data-t="featuresTitle">ÖZELLİKLER</h2>
+      <div class="features">
+        <article class="feature"><b data-t="feature1Title">✦ Piksel piksel çiz</b><p data-t="feature1Text">Tuvali ve renk paletini seç, ardından her pikseli dilediğin gibi yerleştir. Küçük sprite'lardan büyük sahnelere kadar özgürce üret.</p></article>
+        <article class="feature"><b data-t="feature2Title">▣ Kare kare canlandır</b><p data-t="feature2Text">Animasyonunu karelere böl, hareketi zaman çizelgesinde düzenle ve çiziminin canlanışını anında ön izle.</p></article>
+        <article class="feature"><b data-t="feature3Title">⌁ Dışa aktar, paylaş</b><p data-t="feature3Text">Tamamladığın çizimleri ve animasyonları projelerinde kullanmak ve toplulukla paylaşmak için dışa aktar.</p></article>
+      </div>
+    </section>
+    <section class="download" id="indir">
+      <h2 data-t="downloadTitle">İNDİR</h2>
+      <p data-t="downloadIntro">Cihazına uygun kurulum dosyasını seç ve hemen kullanmaya başla.</p>
+      <div class="systems">
+        <div class="system"><strong>▰ Windows</strong><a class="button" href="https://github.com/KULLANICI/REPO/releases/latest" target="_blank" rel="noopener" data-t="installer">KURULUMU İNDİR</a></div>
+        <div class="system"><strong>◉ macOS</strong><span class="coming-soon" data-soon>YAKINDA GELECEK</span></div>
+        <div class="system"><strong>◈ Linux</strong><span class="coming-soon" data-soon>YAKINDA GELECEK</span></div>
+      </div>
+    </section>
+    <section id="hakkinda">
+      <h2 data-t="aboutTitle">HAKKINDA</h2>
+      <p class="about" data-t="aboutText">NastyP Studio, piksel sanatını herkes için ulaşılabilir ve keyifli hâle getirmek için tasarlanan bir piksel çizim ve animasyon uygulamasıdır. Oyun karakterleri, küçük ikonlar, sahneler ve kare kare animasyonlar üret; fikirlerini kendi tarzınla hayata geçir. İster ilk piksel çizimini yap, ister yeni bir oyun dünyası kur: tuval senin.</p>
+    </section>
+    <section id="destek">
+      <div class="community"><h2 data-t="supportTitle">PROJEYİ DESTEKLE</h2><p data-t="supportText">NastyP Studio'nun gelişmesine katkıda bulunmak istersen GitHub üzerinden destek olabilirsin.</p><a class="button" href="https://github.com/sponsors/KULLANICI" target="_blank" rel="noopener" data-t="supportButton">GITHUB ÜZERİNDEN DESTEKLE ↗</a></div>
+    </section>
+    <section id="discord">
+      <div class="community"><h2 data-t="communityTitle">TOPLULUĞA KATIL</h2><p data-t="communityText">Sorular, fikirler ve sohbet için Discord sunucumuza bekleriz.</p><a class="button" href="https://discord.gg/TURR6w37dw" target="_blank" rel="noopener" data-t="joinDiscordArrow">DISCORD'A KATIL ↗</a></div>
+    </section>
+  </main>
+  <footer><span data-t="footer">© 2026 [PROJE ADI] · Sevgiyle yapıldı.</span></footer>
+  <script>
+    const translations = {
+      tr:{navFeatures:'ÖZELLİKLER',navDownload:'İNDİR',navAbout:'HAKKINDA',navSupport:'DESTEKLE',supportTitle:'PROJEYİ DESTEKLE',supportText:"NastyP Studio'nun gelişmesine katkıda bulunmak istersen GitHub üzerinden destek olabilirsin.",supportButton:'GITHUB ÜZERİNDEN DESTEKLE ↗',tagline:'[Projenin ne işe yaradığını anlatan kısa ve akılda kalıcı bir cümle.]',heroDownload:'ŞİMDİ İNDİR ↓',joinDiscord:"DISCORD'A KATIL",featuresTitle:'ÖZELLİKLER',feature1Title:'✦ Kolay kullanım',feature1Text:'[Öne çıkan özelliğini kısa bir cümleyle açıkla.]',feature2Title:'▣ Sana özel',feature2Text:'[Projenin kullanıcıya sağladığı faydayı burada anlat.]',feature3Title:'⌁ Sürekli gelişiyor',feature3Text:'[Yeni özellikler veya güncellemeler hakkında kısa bilgi.]',downloadTitle:'İNDİR',downloadIntro:'Cihazına uygun kurulum dosyasını seç ve hemen kullanmaya başla.',installer:'KURULUMU İNDİR',download:'İNDİR',downloadNote:'İndirme bağlantılarını GitHub Releases sayfandaki dosyalarla güncelle.',aboutTitle:'HAKKINDA',aboutText:'[Projenin hikâyesini, kimler için olduğunu ve neden yaptığını birkaç cümleyle anlat. Bu alanı dilediğin gibi değiştirebilirsin.]',communityTitle:'TOPLULUĞA KATIL',communityText:'Sorular, fikirler ve sohbet için Discord sunucumuza bekleriz.',joinDiscordArrow:"DISCORD'A KATIL ↗",footer:'© 2026 NastyP Studio · Sevgiyle yapıldı.',themeLight:'☀️',themeDark:'🌙'},
+      en:{navFeatures:'FEATURES',navDownload:'DOWNLOAD',navAbout:'ABOUT',navSupport:'SUPPORT',supportTitle:'SUPPORT THE PROJECT',supportText:'Help NastyP Studio grow by supporting the project on GitHub.',supportButton:'SUPPORT ON GITHUB ↗',tagline:'[A short, memorable sentence about what your project does.]',heroDownload:'DOWNLOAD NOW ↓',joinDiscord:'JOIN DISCORD',featuresTitle:'FEATURES',feature1Title:'✦ Easy to use',feature1Text:'[Describe a key feature in one short sentence.]',feature2Title:'▣ Made for you',feature2Text:'[Explain how your project helps its users.]',feature3Title:'⌁ Always improving',feature3Text:'[A short note about new features or updates.]',downloadTitle:'DOWNLOAD',downloadIntro:'Choose the installer for your device and get started.',installer:'DOWNLOAD INSTALLER',download:'DOWNLOAD',downloadNote:'Update these links with the files on your GitHub Releases page.',aboutTitle:'ABOUT',aboutText:'[Tell the story of your project, who it is for, and why you made it.]',communityTitle:'JOIN THE COMMUNITY',communityText:'Join our Discord for questions, ideas, and a friendly chat.',joinDiscordArrow:'JOIN DISCORD ↗',footer:'© 2026 NastyP Studio · Made with care.',themeLight:'☀️',themeDark:'🌙'},
+      ru:{navFeatures:'ВОЗМОЖНОСТИ',navDownload:'СКАЧАТЬ',navAbout:'О ПРОЕКТЕ',navSupport:'ПОДДЕРЖАТЬ',supportTitle:'ПОДДЕРЖИТЕ ПРОЕКТ',supportText:'Помогите NastyP Studio развиваться, поддержав проект на GitHub.',supportButton:'ПОДДЕРЖАТЬ НА GITHUB ↗',tagline:'[Коротко и ярко расскажите, для чего нужен ваш проект.]',heroDownload:'СКАЧАТЬ ↓',joinDiscord:'В DISCORD',featuresTitle:'ВОЗМОЖНОСТИ',feature1Title:'✦ Просто и удобно',feature1Text:'[Кратко опишите главную функцию.]',feature2Title:'▣ Для вас',feature2Text:'[Расскажите, чем проект полезен пользователям.]',feature3Title:'⌁ Постоянно развивается',feature3Text:'[Кратко расскажите об обновлениях.]',downloadTitle:'СКАЧАТЬ',downloadIntro:'Выберите установщик для своего устройства.',installer:'СКАЧАТЬ УСТАНОВЩИК',download:'СКАЧАТЬ',downloadNote:'Замените ссылки файлами на странице GitHub Releases.',aboutTitle:'О ПРОЕКТЕ',aboutText:'[Расскажите историю проекта, для кого он создан и почему.]',communityTitle:'НАШЕ СООБЩЕСТВО',communityText:'Заходите в Discord — обсудим вопросы и идеи.',joinDiscordArrow:'ПРИСОЕДИНИТЬСЯ ↗',footer:'© 2026 NastyP Studio · Сделано с заботой.',themeLight:'☀️',themeDark:'🌙'},
+      uk:{navFeatures:'МОЖЛИВОСТІ',navDownload:'ЗАВАНТАЖИТИ',navAbout:'ПРО ПРОЄКТ',navSupport:'ПІДТРИМАТИ',supportTitle:'ПІДТРИМАЙТЕ ПРОЄКТ',supportText:'Допоможіть NastyP Studio розвиватися — підтримайте проєкт на GitHub.',supportButton:'ПІДТРИМАТИ НА GITHUB ↗',tagline:'[Коротко й цікаво розкажіть, що робить ваш проєкт.]',heroDownload:'ЗАВАНТАЖИТИ ↓',joinDiscord:'ДОЛУЧИТИСЯ ДО DISCORD',featuresTitle:'МОЖЛИВОСТІ',feature1Title:'✦ Просто у використанні',feature1Text:'[Коротко опишіть головну функцію.]',feature2Title:'▣ Для вас',feature2Text:'[Розкажіть, чим проєкт корисний користувачам.]',feature3Title:'⌁ Постійно розвивається',feature3Text:'[Коротко про нові функції чи оновлення.]',downloadTitle:'ЗАВАНТАЖЕННЯ',downloadIntro:'Оберіть інсталятор для свого пристрою.',installer:'ЗАВАНТАЖИТИ ІНСТАЛЯТОР',download:'ЗАВАНТАЖИТИ',downloadNote:'Замініть посилання файлами зі сторінки GitHub Releases.',aboutTitle:'ПРО ПРОЄКТ',aboutText:'[Розкажіть історію проєкту, для кого він і чому ви його створили.]',communityTitle:'ДОЛУЧАЙТЕСЯ ДО СПІЛЬНОТИ',communityText:'Приєднуйтеся до Discord, щоб ставити запитання й ділитися ідеями.',joinDiscordArrow:'ДОЛУЧИТИСЯ ↗',footer:'© 2026 NastyP Studio · Створено з турботою.',themeLight:'☀️',themeDark:'🌙'},
+      lt:{navFeatures:'FUNKCIJOS',navDownload:'ATSISIŲSTI',navAbout:'APIE',navSupport:'PAREMTI',supportTitle:'PAREMKITE PROJEKTĄ',supportText:'Padėkite „NastyP Studio“ augti ir paremkite projektą per „GitHub“.',supportButton:'PAREMTI PER GITHUB ↗',tagline:'[Trumpai ir įsimintinai papasakokite, ką daro jūsų projektas.]',heroDownload:'ATSISIŲSTI ↓',joinDiscord:'PRISIJUNGTI PRIE DISCORD',featuresTitle:'FUNKCIJOS',feature1Title:'✦ Paprasta naudoti',feature1Text:'[Trumpai aprašykite svarbiausią funkciją.]',feature2Title:'▣ Jums',feature2Text:'[Paaiškinkite, kuo projektas naudingas.]',feature3Title:'⌁ Nuolat tobulėja',feature3Text:'[Trumpai apie naujas funkcijas ar naujinius.]',downloadTitle:'ATSISIŲSTI',downloadIntro:'Pasirinkite savo įrenginiui skirtą diegimo failą.',installer:'ATSISIŲSTI DIEGIMO FAILĄ',download:'ATSISIŲSTI',downloadNote:'Atnaujinkite nuorodas į failus „GitHub Releases“ puslapyje.',aboutTitle:'APIE PROJEKTĄ',aboutText:'[Papasakokite projekto istoriją, kam jis skirtas ir kodėl jį sukūrėte.]',communityTitle:'PRISIJUNKITE PRIE BENDRUOMENĖS',communityText:'Prisijunkite prie mūsų „Discord“ ir pasidalykite klausimais bei idėjomis.',joinDiscordArrow:'PRISIJUNGTI ↗',footer:'© 2026 NastyP Studio · Sukurta su rūpesčiu.',themeLight:'☀️',themeDark:'🌙'},
+      de:{navFeatures:'FUNKTIONEN',navDownload:'DOWNLOAD',navAbout:'ÜBER UNS',navSupport:'UNTERSTÜTZEN',supportTitle:'PROJEKT UNTERSTÜTZEN',supportText:'Unterstütze NastyP Studio auf GitHub und hilf dem Projekt zu wachsen.',supportButton:'AUF GITHUB UNTERSTÜTZEN ↗',tagline:'[Ein kurzer, einprägsamer Satz darüber, was dein Projekt macht.]',heroDownload:'JETZT DOWNLOADEN ↓',joinDiscord:'DISCORD BEITRETEN',featuresTitle:'FUNKTIONEN',feature1Title:'✦ Einfach zu bedienen',feature1Text:'[Beschreibe ein wichtiges Merkmal in einem Satz.]',feature2Title:'▣ Für dich gemacht',feature2Text:'[Erkläre, welchen Nutzen dein Projekt bietet.]',feature3Title:'⌁ Wird ständig verbessert',feature3Text:'[Ein kurzer Hinweis auf neue Funktionen oder Updates.]',downloadTitle:'DOWNLOAD',downloadIntro:'Wähle das Installationsprogramm für dein Gerät.',installer:'INSTALLATION HERUNTERLADEN',download:'HERUNTERLADEN',downloadNote:'Ersetze diese Links durch Dateien deiner GitHub-Releases-Seite.',aboutTitle:'ÜBER DAS PROJEKT',aboutText:'[Erzähle die Geschichte deines Projekts, für wen es gedacht ist und warum du es erstellt hast.]',communityTitle:'TEILE DIE COMMUNITY',communityText:'Komm auf unseren Discord-Server für Fragen, Ideen und Gespräche.',joinDiscordArrow:'DISCORD BEITRETEN ↗',footer:'© 2026 NastyP Studio · Mit Sorgfalt gemacht.',themeLight:'☀️',themeDark:'🌙'}
+    };
+    // Pixel-art app copy, kept separate so each supported language stays complete.
+    const appCopy = {
+      tr:{tagline:'Piksel piksel çiz, kare kare canlandır. NastyP Studio ile fikirlerini küçük ama etkileyici sanat eserlerine dönüştür.',feature1Title:'✦ Piksel piksel çiz',feature1Text:'Tuvali ve renk paletini seç, ardından her pikseli dilediğin gibi yerleştir. Küçük sprite’lardan büyük sahnelere kadar özgürce üret.',feature2Title:'▣ Kare kare canlandır',feature2Text:'Animasyonunu karelere böl, hareketi zaman çizelgesinde düzenle ve çiziminin canlanışını anında ön izle.',feature3Title:'⌁ Dışa aktar, paylaş',feature3Text:'Tamamladığın çizimleri ve animasyonları projelerinde kullanmak ve toplulukla paylaşmak için dışa aktar.',aboutText:'NastyP Studio, piksel sanatını herkes için ulaşılabilir ve keyifli hâle getirmek için tasarlanan bir piksel çizim ve animasyon uygulamasıdır. Oyun karakterleri, küçük ikonlar, sahneler ve kare kare animasyonlar üret; fikirlerini kendi tarzınla hayata geçir. İster ilk piksel çizimini yap, ister yeni bir oyun dünyası kur: tuval senin.'},
+      en:{tagline:'Draw pixel by pixel and animate frame by frame. Turn your ideas into tiny works of art with NastyP Studio.',feature1Title:'✦ Pixel-perfect drawing',feature1Text:'Choose a canvas and palette, then place every pixel just the way you want. Create anything from tiny sprites to detailed scenes.',feature2Title:'▣ Frame-by-frame animation',feature2Text:'Build an animation one frame at a time, arrange frames on the timeline, and preview the motion as you work.',feature3Title:'⌁ Export and share',feature3Text:'Export finished artwork and animations for your games, creative projects, or the community.',aboutText:'NastyP Studio is a pixel art and animation app made to keep creating approachable and fun. Design game characters, icons, scenes, and frame-by-frame animations. Whether you are drawing your first sprite or building a whole game world, make it your own.'},
+      ru:{tagline:'Рисуйте пиксель за пикселем и оживляйте кадр за кадром. Превращайте идеи в маленькие произведения искусства вместе с NastyP Studio.',feature1Title:'✦ Рисование по пикселям',feature1Text:'Выберите холст и палитру, размещайте пиксели и создавайте спрайты или целые сцены.',feature2Title:'▣ Анимация по кадрам',feature2Text:'Создавайте анимацию кадр за кадром, настраивайте кадры на шкале времени и сразу смотрите результат.',feature3Title:'⌁ Экспорт и публикация',feature3Text:'Экспортируйте готовые рисунки и анимацию для игр, проектов или публикации в сообществе.',aboutText:'NastyP Studio — приложение для рисования и анимации в стиле пиксель-арт. Создавайте персонажей, значки, сцены и анимацию кадр за кадром. От первого спрайта до целого игрового мира — творите в своём стиле.'},
+      uk:{tagline:'Малюйте піксель за пікселем і оживляйте кадр за кадром. Перетворюйте ідеї на маленькі витвори мистецтва з NastyP Studio.',feature1Title:'✦ Малювання піксель за пікселем',feature1Text:'Оберіть полотно й палітру, розміщуйте пікселі та створюйте спрайти або цілі сцени.',feature2Title:'▣ Покадрова анімація',feature2Text:'Створюйте анімацію кадр за кадром, упорядковуйте кадри на часовій шкалі й одразу переглядайте результат.',feature3Title:'⌁ Експорт і поширення',feature3Text:'Експортуйте готові малюнки й анімації для ігор, проєктів або спільноти.',aboutText:'NastyP Studio — застосунок для піксель-арту й анімації, створений, щоб творчість була доступною та цікавою. Малюйте персонажів, іконки, сцени й анімацію кадр за кадром. Від першого спрайта до цілого ігрового світу — творіть у власному стилі.'},
+      lt:{tagline:'Pieškite pikselis po pikselio ir kurkite animaciją kadras po kadro. Paverskite idėjas mažais meno kūriniais su „NastyP Studio“.',feature1Title:'✦ Piešimas pikseliais',feature1Text:'Pasirinkite drobę ir spalvų paletę, dėliokite pikselius ir kurkite sprite’us ar ištisas scenas.',feature2Title:'▣ Animacija kadras po kadro',feature2Text:'Kurkite animaciją kadras po kadro, dėliokite kadrus laiko juostoje ir iškart peržiūrėkite rezultatą.',feature3Title:'⌁ Eksportuokite ir dalykitės',feature3Text:'Eksportuokite kūrinius ir animacijas žaidimams, projektams ar bendruomenei.',aboutText:'„NastyP Studio“ – pikselių piešimo ir animacijos programa, skirta kūrybai padaryti paprastą ir smagią. Kurkite žaidimų veikėjus, piktogramas, scenas ir animaciją kadras po kadro. Nuo pirmojo piešinio iki viso žaidimų pasaulio – kurkite savaip.'},
+      de:{tagline:'Zeichne Pixel für Pixel und animiere Bild für Bild. Verwandle deine Ideen mit NastyP Studio in kleine Kunstwerke.',feature1Title:'✦ Pixel für Pixel zeichnen',feature1Text:'Wähle Leinwand und Farbpalette und gestalte Sprites und Szenen Pixel für Pixel.',feature2Title:'▣ Animation Bild für Bild',feature2Text:'Erstelle Animationen Frame für Frame, ordne sie auf der Zeitleiste und prüfe sofort das Ergebnis.',feature3Title:'⌁ Exportieren und teilen',feature3Text:'Exportiere fertige Grafiken und Animationen für Spiele, Projekte oder die Community.',aboutText:'NastyP Studio ist eine Pixelkunst- und Animationsanwendung, die kreatives Arbeiten zugänglich und unterhaltsam macht. Erstelle Spielfiguren, Icons, Szenen und Animationen Bild für Bild. Ob dein erstes Pixelbild oder eine ganze Spielwelt – gestalte sie in deinem Stil.'}
+    };
+    Object.entries(appCopy).forEach(([lang, copy]) => Object.assign(translations[lang], copy));
+    const soonLabels = {tr:'YAKINDA GELECEK',en:'COMING SOON',ru:'СКОРО',uk:'НЕЗАБАРОМ',lt:'NETRUKUS',de:'DEMNÄCHST'};
+    const language = document.getElementById('language');
+    const themeToggle = document.getElementById('themeToggle');
+    function applyLanguage(code) { const words=translations[code]||translations.en; document.documentElement.lang=code; document.querySelectorAll('[data-t]').forEach(el=>{el.textContent=words[el.dataset.t]||el.textContent}); document.querySelectorAll('[data-soon]').forEach(el=>{el.textContent=soonLabels[code]||soonLabels.en}); language.value=code; localStorage.setItem('site-language',code); themeToggle.textContent=document.body.dataset.theme==='dark'?words.themeLight:words.themeDark; }
+    function applyTheme(theme) { document.body.dataset.theme=theme; localStorage.setItem('site-theme',theme); const words=translations[language.value]||translations.en; themeToggle.textContent=theme==='dark'?words.themeLight:words.themeDark; themeToggle.setAttribute('aria-label',theme==='dark'?'Switch to light theme':'Switch to dark theme'); }
+    language.addEventListener('change',()=>applyLanguage(language.value));
+    themeToggle.addEventListener('click',()=>applyTheme(document.body.dataset.theme==='dark'?'light':'dark'));
+    applyTheme(localStorage.getItem('site-theme')||'light');
+    applyLanguage(localStorage.getItem('site-language')||'tr');
+  </script>
+</body>
+</html>
